@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Sekali Tonton</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            text-align: center;
+        }
+        video {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <video id="myVideo" controls>
+            <source src="video.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <div id="message" style="display: none;">
+            <p>Terima kasih telah menonton!</p>
+        </div>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', (event) => {
+            const video = document.getElementById('myVideo');
+            const message = document.getElementById('message');
+
+            // Mengecek jika video sudah ditonton sebelumnya
+            if (localStorage.getItem('videoWatched') === 'true') {
+                video.style.display = 'none';
+                message.style.display = 'block';
+            }
+
+            video.addEventListener('ended', () => {
+                localStorage.setItem('videoWatched', 'true');
+                video.style.display = 'none';
+                message.style.display = 'block';
+            });
+        });
+    </script>
+</body>
+</html>
